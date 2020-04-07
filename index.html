@@ -1,0 +1,90 @@
+<html>
+<head><title>My SQL</title></head>
+<body>
+<h1>InClass Assignment 8</h1><br>
+
+<h3>1. Create a Products table</h3><br>
+
+<p>CREATE TABLE Products(
+ProductID INT(11) AUTO_INCREMENT PRIMARY KEY,
+ProductName VARCHAR(40) NOT NULL,
+SupplierID INT(11) DEFAULT NULL,
+CategoryID INT(11) DEFAULT NULL,
+QuantityPerUnit VARCHAR(20) DEFAULT NULL,
+UnitPrice DECIMAL(10,4) DEFAULT 0.0000,
+UnitsInStock SMALLINT(2) DEFAULT 0,
+UnitsOnOrder SMALLINT(2) DEFAULT 0,
+Reorderlevel SMALLINT(2) DEFAULT 0,
+Discontinued BIT(1) NOT NULL DEFAULT 0);</p><br>
+
+<img src="Q1.jpg"></img><br>
+
+<h3>2. Insert values into Products table</h3><br>
+
+<img src="Q2.jpg"></img><br>
+
+<h3>3. Write a query to get Product name and quantity/unit</h3><br>
+
+<p>select ProductName, QuantityPerUnit from Products;</p><br>
+
+<img src="Q3.jpg"></img><br>
+<img src="Q3b.jpg"></img><br>
+
+<h3>4. Write a query to get current Product list (Product ID and name) </h3><br>
+
+<p>select ProductID, ProductName from Products where Discontinued = "False";</p><br>
+
+<img src="Q4.jpg"></img><br>
+<img src="Q4b.jpg"></img><br>
+
+<h3>5. Write a query to get discontinued Product list (Product ID and name) </h3><br>
+
+<p>select ProductID, ProductName from Products where Discontinued = 1;</p><br>
+
+<img src="Q5.jpg"></img><br>
+
+<h3>6. Write a query to get most expensive and least expensive Product list(name and unit price) </h3><br>
+
+<p>select ProductName, UnitPrice from Products order by UnitPrice desc;</p><br>
+
+<img src="Q6.jpg"></img><br>
+<img src="Q6b.jpg"></img><br>
+
+<h3>7. Write a query to get Product list (id, name, unit price) where current products cost less than $20.</h3><br>
+
+<p>select ProductID, ProductName, UnitPrice from Products where (((UnitPrice)<20) and ((Discontinued)=False)) order by UnitPrice desc;</p><br>
+
+<img src="Q7.jpg"></img><br>
+
+<h3>8. Write a query to get Product list (id, name, unit price) where products cost between $15 and $25.</h3><br>
+
+<p>select ProductID, ProductName, UnitPrice from Products where (UnitPrice >= 15 and UnitPrice <= 25) order by UnitPrice desc;</p><br>
+
+<img src="Q8.jpg"></img><br>
+
+<h3>9. Write a query to get Product list (name, unit price) of above average price.</h3><br>
+
+<p>select distinct ProductName, UnitPrice from Products where UnitPrice > (select avg(UnitPrice) from Products) order by UnitPrice;</p><br>
+
+<img src="Q9.jpg"></img><br>
+
+<h3>10. Write a query to get Product list (name, unit price) of ten most expensive products.</h3><br>
+
+<p>select distinct ProductName as TEN_MOST_EXPENSIVE_PRODUCTS, UnitPrice from Products as a where 10 >= (select count(DISTINCT UnitPrice) from Products as b where b.UnitPrice >= a.UnitPrice) order by UnitPrice desc;</p><br>
+
+<img src="Q10.jpg"></img><br>
+
+<h3>11. Write a query to count current and discontinued products.</h3><br>
+
+<p> select count(ProductName) from Products group by Discontinued;</p><br>
+
+<img src="Q11.jpg"></img><br>
+
+<h3>12. Write a query to get Product list (name, units on order, units in stock) of stock is less than the quantity on order.</h3><br>
+
+<p>select ProductName, UnitsOnOrder, UnitsInStock from Products where (((Discontinued)=False) and ((UnitsInStock)<UnitsOnOrder));</p><br>
+
+<img src="Q12.jpg"></img><br>
+
+</body>
+</html>
